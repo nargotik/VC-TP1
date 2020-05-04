@@ -1,0 +1,43 @@
+os: linux
+dist: bionic
+
+language: cpp
+
+sudo: enabled
+
+addons:
+  apt:
+    packages:
+      - texlive
+      - texlive-latex-extra
+      - libsqlite3-dev
+      - flex
+      - libfl-dev
+
+before_install:
+  - export DOXYGEN_VER=doxygen-1.8.16
+  - export DOXYGEN_TAR=${DOXYGEN_VER}.linux.bin.tar.gz
+  - export DOXYGEN_URL="http://doxygen.nl/files/${DOXYGEN_TAR}"
+
+before_script:
+  - sudo pip install ghp-import
+  - wget -O - "${DOXYGEN_URL}" | tar xz -C ${TMPDIR-/tmp} ${DOXYGEN_VER}/bin/doxygen
+  - export PATH="${TMPDIR-/tmp}/${DOXYGEN_VER}/bin:$PATH"
+
+branches:
+  only:
+    - master
+script:
+  - doxygen Doxyfile
+  - make
+  - make run_import
+  - ls -la *
+  - make run_display
+
+deploy:
+  provider: pages
+  skip_cleanup: true
+  local_dir: docs/html
+  github_token: $GH_REPO_TOKEN
+  on:
+    branch: master
