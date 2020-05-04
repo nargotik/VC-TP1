@@ -79,7 +79,7 @@ void invertImageBinary(IVC *src) {
  * @param value
  */
 void fillImage(IVC *src, unsigned char value) {
-    long int maxpixels = src->width * src->height;
+    long int maxpixels = src->width * src->height * 3;
     for (int xy = 0; xy < maxpixels; xy++) {
         src->data[xy] = value;
         src->data[xy+1] = value;
