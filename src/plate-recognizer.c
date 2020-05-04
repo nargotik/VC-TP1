@@ -22,7 +22,7 @@ char output_dir[PATH_MAX] = "";
 
 void debugSave(char *filen,int id, IVC *src) {
     char fileimagename[PATH_MAX];
-    sprintf(fileimagename,"%s%s_%d.ppm",output_dir,filen,id);
+    sprintf(fileimagename,"%s/%s_%d.ppm",output_dir,filen,id);
     vc_write_image(fileimagename, src);
 }
 
@@ -353,8 +353,18 @@ int processImage(char *name, char *directorio) {
     OVC blobs_caracteres[6];
 
     strcat(output_dir,directorio);
+    strcat(output_dir,"");
     //strcat(ficheiro,directorio);
     strcat(ficheiro,name);
+
+    if (!file_exists(ficheiro)) {
+        printf("File %s not found!\n", ficheiro);
+        exit(EXIT_FAILURE);
+    }
+    if (!directory_exists(output_dir)) {
+        printf("Directory %s not found!\n", output_dir);
+        exit(EXIT_FAILURE);
+    }
 
     IVC *image[10];
     OVC *blobs[2];

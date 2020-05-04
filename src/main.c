@@ -34,14 +34,7 @@ int main(int argc, char** argv) {
         strcpy(ficheiro,argv[1]);
         strcpy(directorio,argv[2]);
 
-        if (!file_exists(ficheiro)) {
-            printf("File not found!\n");
-            return(EXIT_FAILURE);
-        }
-        if (!file_exists(directorio)) {
-            printf("Directory not found!\n");
-            return(EXIT_FAILURE);
-        }
+
         printf("\nStarting processing %s....\n",ficheiro);
 
         if (processImage(ficheiro, directorio)) {
