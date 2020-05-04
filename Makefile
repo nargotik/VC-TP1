@@ -59,7 +59,7 @@ docs: Doxyfile
 	doxygen
 #	generate PDF from LaTeX sources
 	cd $(DOCDIR)$(TEXDIR) && $(MAKE)
-	mv $(DOCDIR)$(TEXDIR)refman.pdf $(DOCDIR)
+#	mv $(DOCDIR)$(TEXDIR)refman.pdf $(DOCDIR)
 
 docs-clean:
 	cd $(DOCDIR)$(TEXDIR) && $(MAKE) clean
